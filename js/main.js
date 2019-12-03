@@ -23,18 +23,29 @@ brown.onclick = function(){
 	brown.classList.add('active');
 	green.classList.remove('active')
 	orange.classList.remove('active')
+	black.classList.remove('active')
+}
+black.onclick = function(){
+	context.strokeStyle = 'black';
+	black.classList.add('active');
+	brown.classList.remove('active');
+	green.classList.remove('active')
+	orange.classList.remove('active')
 }
 green.onclick = function(){
 	context.strokeStyle = 'green';
 	green.classList.add('active');
 	brown.classList.remove('active');
 	orange.classList.remove('active')
+	black.classList.remove('active')
+
 }
 orange.onclick = function(){
 	context.strokeStyle = 'orange';
 	orange.classList.add('active');
 	brown.classList.remove('active');
 	green.classList.remove('active');
+	black.classList.remove('active');	
 }
 
 function listenToUser(){
