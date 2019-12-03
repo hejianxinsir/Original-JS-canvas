@@ -8,6 +8,15 @@
 	background: white;
 }
 
+.actions >  #eraser:focus{
+	outline: none;
+	border: 1px solid brown;
+}
+.actions >  #brush:focus{
+	outline: none;
+	border: 1px solid brown;
+}
+
 .actions {
 	position: fixed;
 	bottom: 14px;

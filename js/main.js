@@ -5,7 +5,7 @@ let using = false;
 let eraserEnabled = false;
 
 autoSetCanvas(canvas);
-listenToMouse();
+listenToUser();
 
 eraser.onclick = function(){
 	actions.className = 'actions x';
@@ -16,39 +16,78 @@ brush.onclick = function(){
 	eraserEnabled = false;
 }
 
-function listenToMouse(){
+function listenToUser(){
 	let previousPoint = {x: undefined, y: undefined}
 	
-	canvas.onmousedown = function(aaa){
-		var x = aaa.clientX
-		var y = aaa.clientY
-		using = true
-		if(eraserEnabled){
-			context.clearRect(x-5,y-5,10,10)	
-		}else{
-			previousPoint = {x: x, y: y}
-		}
-	}
-	
-	canvas.onmousemove = function(aaa){
-		var x = aaa.clientX
-		var y = aaa.clientY
-
-		if(eraserEnabled){
-			if(using === true){
+	if(document.body.ontouchstart !== undefined){
+		// 触屏设备  检测是不是触屏设备，这个技术叫特性检测，我们检测的是特性，不是设备。
+		canvas.ontouchstart = function(aaa){
+			console.log('开始')	
+			var x = aaa.touches[0].clientX
+			var y = aaa.touches[0].clientY
+			using = true
+			if(eraserEnabled){
 				context.clearRect(x-5,y-5,10,10)	
+			}else{
+				previousPoint = {x: x, y: y}
 			}
-		}else{
-			if(using === true){
-				var	presentPoint = {x: x, y: y}
-				drawLine(previousPoint.x, previousPoint.y, presentPoint.x, presentPoint.y)
-				previousPoint = presentPoint
-			}else{}
 		}
-	}
-	
-	canvas.onmouseup = function(aaa){
-		using = false;
+		canvas.ontouchmove = function(aaa){
+			console.log('移动')	
+			var x = aaa.touches[0].clientX
+			var y = aaa.touches[0].clientY
+
+			if(eraserEnabled){
+				if(using === true){
+					context.clearRect(x-5,y-5,10,10)	
+				}
+			}else{
+				if(using === true){
+					var	presentPoint = {x: x, y: y}
+					drawLine(previousPoint.x, previousPoint.y, presentPoint.x, presentPoint.y)
+					previousPoint = presentPoint
+				}else{}
+			}
+
+		}
+		canvas.ontouchend = function(aaa){
+			console.log('结束')	
+			using = false;
+		}
+	}else{
+		// 非触屏设备	
+		canvas.onmousedown = function(aaa){
+			var x = aaa.clientX
+			var y = aaa.clientY
+			using = true
+			if(eraserEnabled){
+				context.clearRect(x-5,y-5,10,10)	
+			}else{
+				previousPoint = {x: x, y: y}
+			}
+		}
+		
+		canvas.onmousemove = function(aaa){
+			var x = aaa.clientX
+			var y = aaa.clientY
+
+			if(eraserEnabled){
+				if(using === true){
+					context.clearRect(x-5,y-5,10,10)	
+				}
+			}else{
+				if(using === true){
+					var	presentPoint = {x: x, y: y}
+					drawLine(previousPoint.x, previousPoint.y, presentPoint.x, presentPoint.y)
+					previousPoint = presentPoint
+				}else{}
+			}
+		}
+		
+		canvas.onmouseup = function(aaa){
+			using = false;
+		}
+
 	}
 	
 	eraser.onclick = function(){
