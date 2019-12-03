@@ -7,6 +7,12 @@ let eraserEnabled = false;
 autoSetCanvas(canvas);
 listenToUser();
 
+// 铅笔和橡皮、清空、下载
+
+clear.onclick = function(){
+	context.clearRect(0,0,canvas.width,canvas.height)
+}
+
 brush.onclick = function(){
 	eraserEnabled = false;
 	brush.classList.add('active');
@@ -17,6 +23,49 @@ eraser.onclick = function(){
 	eraser.classList.add('active');
 	brush.classList.remove('active');
 }
+download.onclick = function(){
+	var url = canvas.toDataURL("image/png");
+	var a = document.createElement('a');
+	document.body.appendChild(a);
+	a.href = url
+	a.download = '我的画作'
+	a.click()
+}
+
+// 选择粗细
+
+thick.onclick = function(){
+	context.lineWidth = 7
+	thick.classList.add('active');
+	medium.classList.remove('active');
+	thin.classList.remove('active');
+	start.classList.remove('active');
+}
+medium.onclick = function(){
+	context.lineWidth = 4
+	medium.classList.add('active');
+	thick.classList.remove('active');
+	thin.classList.remove('active');
+	start.classList.remove('active');
+
+}
+thin.onclick = function(){
+	context.lineWidth = 2
+	medium.classList.remove('active');
+	thick.classList.remove('active');
+	thin.classList.add('active');
+	start.classList.remove('active');
+}
+start.onclick = function(){
+	context.lineWidth = 1
+	medium.classList.remove('active');
+	thick.classList.remove('active');
+	thin.classList.remove('active');
+	start.classList.add('active');
+
+}
+
+// 选择颜色
 
 brown.onclick = function(){
 	context.strokeStyle = 'brown';
@@ -54,7 +103,6 @@ function listenToUser(){
 	if(document.body.ontouchstart !== undefined){
 		// 触屏设备  检测是不是触屏设备，这个技术叫特性检测，我们检测的是特性，不是设备。
 		canvas.ontouchstart = function(aaa){
-			console.log('开始')	
 			var x = aaa.touches[0].clientX
 			var y = aaa.touches[0].clientY
 			using = true
@@ -65,7 +113,6 @@ function listenToUser(){
 			}
 		}
 		canvas.ontouchmove = function(aaa){
-			console.log('移动')	
 			var x = aaa.touches[0].clientX
 			var y = aaa.touches[0].clientY
 
@@ -83,7 +130,6 @@ function listenToUser(){
 
 		}
 		canvas.ontouchend = function(aaa){
-			console.log('结束')	
 			using = false;
 		}
 	}else{
@@ -138,7 +184,6 @@ function drawCircle(x,y,radius){
 function drawLine(x1,y1,x2,y2){
 	context.beginPath();
 	context.moveTo(x1,y1);
-	context.lineWidth = 3;
 	context.lineTo(x2,y2);
 	context.stroke();
 	context.closePath();
