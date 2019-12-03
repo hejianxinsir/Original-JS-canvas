@@ -7,13 +7,34 @@ let eraserEnabled = false;
 autoSetCanvas(canvas);
 listenToUser();
 
-eraser.onclick = function(){
-	actions.className = 'actions x';
-	eraserEnabled = true;
-}
 brush.onclick = function(){
-	actions.className = 'actions';
 	eraserEnabled = false;
+	brush.classList.add('active');
+	eraser.classList.remove('active');
+}
+eraser.onclick = function(){
+	eraserEnabled = true;
+	eraser.classList.add('active');
+	brush.classList.remove('active');
+}
+
+brown.onclick = function(){
+	context.strokeStyle = 'brown';
+	brown.classList.add('active');
+	green.classList.remove('active')
+	orange.classList.remove('active')
+}
+green.onclick = function(){
+	context.strokeStyle = 'green';
+	green.classList.add('active');
+	brown.classList.remove('active');
+	orange.classList.remove('active')
+}
+orange.onclick = function(){
+	context.strokeStyle = 'orange';
+	orange.classList.add('active');
+	brown.classList.remove('active');
+	green.classList.remove('active');
 }
 
 function listenToUser(){
