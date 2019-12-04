@@ -67,9 +67,18 @@ start.onclick = function(){
 
 // 选择颜色
 
+blue.onclick = function(){
+	context.strokeStyle = 'blue';
+	blue.classList.add('active');
+	brown.classList.remove('active');
+	green.classList.remove('active')
+	orange.classList.remove('active')
+	black.classList.remove('active')
+}
 brown.onclick = function(){
 	context.strokeStyle = 'brown';
 	brown.classList.add('active');
+	blue.classList.remove('active');
 	green.classList.remove('active')
 	orange.classList.remove('active')
 	black.classList.remove('active')
@@ -77,6 +86,7 @@ brown.onclick = function(){
 black.onclick = function(){
 	context.strokeStyle = 'black';
 	black.classList.add('active');
+	blue.classList.remove('active');
 	brown.classList.remove('active');
 	green.classList.remove('active')
 	orange.classList.remove('active')
@@ -85,6 +95,7 @@ green.onclick = function(){
 	context.strokeStyle = 'green';
 	green.classList.add('active');
 	brown.classList.remove('active');
+	blue.classList.remove('active');
 	orange.classList.remove('active')
 	black.classList.remove('active')
 
@@ -95,6 +106,7 @@ orange.onclick = function(){
 	brown.classList.remove('active');
 	green.classList.remove('active');
 	black.classList.remove('active');	
+	blue.classList.remove('active');
 }
 
 function listenToUser(){
@@ -107,7 +119,7 @@ function listenToUser(){
 			var y = aaa.touches[0].clientY
 			using = true
 			if(eraserEnabled){
-				context.clearRect(x-5,y-5,10,10)	
+				context.clearRect(x-5,y-5,20,20)	
 			}else{
 				previousPoint = {x: x, y: y}
 			}
@@ -118,7 +130,7 @@ function listenToUser(){
 
 			if(eraserEnabled){
 				if(using === true){
-					context.clearRect(x-5,y-5,10,10)	
+					context.clearRect(x-5,y-5,20,20)	
 				}
 			}else{
 				if(using === true){
@@ -139,7 +151,7 @@ function listenToUser(){
 			var y = aaa.clientY
 			using = true
 			if(eraserEnabled){
-				context.clearRect(x-5,y-5,10,10)	
+				context.clearRect(x-5,y-5,20,20)	
 			}else{
 				previousPoint = {x: x, y: y}
 			}
@@ -151,7 +163,7 @@ function listenToUser(){
 
 			if(eraserEnabled){
 				if(using === true){
-					context.clearRect(x-5,y-5,10,10)	
+					context.clearRect(x-5,y-5,20,20)	
 				}
 			}else{
 				if(using === true){

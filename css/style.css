@@ -16,6 +16,9 @@ body{
 
 .canvas {
 	background: white;
+	position: fixed;
+	top: 0;
+	left: 0;
 }
 
 .actions {
@@ -69,6 +72,9 @@ body{
 .colors .black{
 	background: black;
 }
+.colors .blue{
+	background: blue;
+}
 
 
 ol.line {
@@ -106,6 +112,3 @@ li.start{
 	transform: scale(1.2);
 }
 
-.download {
-	transform: scall(1.2);
-}
